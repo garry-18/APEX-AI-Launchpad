@@ -249,7 +249,6 @@ function ActivitiesPage() {
         .from("profiles")
         .update({
           activity_submissions: newRecords,
-          onboarding_completed: true,
         })
         .eq("id", userId);
     }
@@ -274,7 +273,6 @@ function ActivitiesPage() {
         .from("profiles")
         .update({
           activity_submissions: newRecords,
-          onboarding_completed: true,
         })
         .eq("id", userId);
     }

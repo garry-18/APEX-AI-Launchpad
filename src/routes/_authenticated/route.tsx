@@ -170,6 +170,28 @@ export const Route = createFileRoute("/_authenticated")({
           });
         }
 
+        // Prevent accessing /interaction if dossier is not approved/skipped yet
+        if (location.pathname.startsWith("/interaction")) {
+          // If the profile query didn't fetch it because it's not a column, default to empty or mock verification
+          // Since activity_submissions isn't in profiles table, it's actually mock stored or from metadata. Let's fetch it via metadata.
+          const { data: dbProfile } = await supabase
+            .from("profiles")
+            .select("activity_submissions")
+            .eq("id", user.id)
+            .maybeSingle();
+            
+          const submissions = (dbProfile && (dbProfile as any).activity_submissions) || {};
+          const dossierRecord = submissions[7];
+          const isDossierApproved = dossierRecord && (dossierRecord.status === "approved" || dossierRecord.status === "skipped");
+          if (!isDossierApproved) {
+            console.log("[Route Debug] Dossier not approved yet, redirecting to /activities");
+            throw redirect({
+              to: "/activities",
+              replace: true,
+            });
+          }
+        }
+
         if (onboardingCompleted && (location.pathname.startsWith("/onboarding") || location.pathname.startsWith("/questionnaire") || location.pathname.startsWith("/lms-integration") || location.pathname.startsWith("/activities") || location.pathname.startsWith("/interaction") || location.pathname.startsWith("/project-allocation"))) {
           throw redirect({
             to: "/dashboard",
