@@ -75,6 +75,7 @@ export function isRoleAllowed(role: Role | null, pathname: string): boolean {
   const isSharedPath =
     pathname.startsWith("/profile") ||
     pathname.startsWith("/settings") ||
+    pathname.startsWith("/support") ||
     pathname.startsWith("/pending-work") ||
     pathname.startsWith("/feedback-suggestions") ||
     pathname.startsWith("/leaderboard") ||

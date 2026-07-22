@@ -161,7 +161,7 @@ export const Route = createFileRoute("/_authenticated")({
           });
         }
 
-        if (!onboardingCompleted && !location.pathname.startsWith("/onboarding")) {
+        if (!onboardingCompleted && !location.pathname.startsWith("/onboarding") && !location.pathname.startsWith("/questionnaire") && !location.pathname.startsWith("/lms-integration") && !location.pathname.startsWith("/activities") && !location.pathname.startsWith("/interaction") && !location.pathname.startsWith("/project-allocation")) {
           console.log("[Route Debug] Redirecting intern to /onboarding");
 
           throw redirect({
@@ -170,7 +170,7 @@ export const Route = createFileRoute("/_authenticated")({
           });
         }
 
-        if (onboardingCompleted && location.pathname.startsWith("/onboarding")) {
+        if (onboardingCompleted && (location.pathname.startsWith("/onboarding") || location.pathname.startsWith("/questionnaire") || location.pathname.startsWith("/lms-integration") || location.pathname.startsWith("/activities") || location.pathname.startsWith("/interaction") || location.pathname.startsWith("/project-allocation"))) {
           throw redirect({
             to: "/dashboard",
             replace: true,

@@ -27,6 +27,8 @@ import {
   CalendarOff,
   PieChart,
   Bell,
+  HelpCircle,
+  Calendar,
 } from "lucide-react";
 import { useEffect, useState, useMemo, type ReactNode } from "react";
 import { useMyProfile } from "@/hooks/use-current-user";
@@ -79,33 +81,45 @@ function AppShellInner({ children }: { children: ReactNode }) {
         },
         {
           to: "/admin/dashboard#interns",
-          label: "Intern Management",
+          label: "Assigned Students",
           icon: Users,
-          title: "Intern Management",
+          title: "Assigned Students",
         },
         {
-          to: "/admin/dashboard#live-attendance",
-          label: "Live Attendance",
-          icon: Activity,
-          title: "Live Attendance",
+          to: "/admin/dashboard#questionnaire",
+          label: "Questionnaire Responses",
+          icon: HelpCircle,
+          title: "Questionnaire Responses",
         },
         {
-          to: "/admin/dashboard#sessions",
-          label: "Attendance Sessions",
-          icon: Clock,
-          title: "Attendance Sessions",
+          to: "/admin/dashboard#lms",
+          label: "LMS Progress",
+          icon: BookOpen,
+          title: "LMS Progress",
         },
         {
-          to: "/admin/dashboard#reports",
-          label: "Attendance Reports",
-          icon: FileSpreadsheet,
-          title: "Attendance Reports",
+          to: "/admin/dashboard#activities",
+          label: "Onboarding Activities",
+          icon: Sparkles,
+          title: "Onboarding Activities",
         },
         {
-          to: "/admin/dashboard#problems",
-          label: "Problem Statements",
+          to: "/admin/dashboard#interview",
+          label: "1-to-1 Interviews",
+          icon: Calendar,
+          title: "1-to-1 Interviews",
+        },
+        {
+          to: "/admin/dashboard#internship",
+          label: "Internship Management",
           icon: Briefcase,
-          title: "Problem Statements",
+          title: "Internship Management",
+        },
+        {
+          to: "/admin/dashboard#announcements",
+          label: "Announcements",
+          icon: Send,
+          title: "Announcements",
         },
         {
           to: "/admin/dashboard#notifications",
@@ -113,7 +127,14 @@ function AppShellInner({ children }: { children: ReactNode }) {
           icon: Bell,
           title: "Notifications",
         },
+        {
+          to: "/admin/dashboard#profile",
+          label: "Admin Profile",
+          icon: User,
+          title: "Admin Profile",
+        },
         { to: "/admin/dashboard#settings", label: "Settings", icon: Settings, title: "Settings" },
+        { to: "/support", label: "Help & Support", icon: HelpCircle, title: "Help & Support" },
       ];
     }
     if (role === "super_admin") {
@@ -125,16 +146,16 @@ function AppShellInner({ children }: { children: ReactNode }) {
           title: "Super Admin Dashboard",
         },
         {
-          to: "/super-admin/dashboard#admins",
-          label: "Admin Management",
-          icon: ShieldCheck,
-          title: "Admin Management",
+          to: "/super-admin/dashboard#interns",
+          label: "Students",
+          icon: Users,
+          title: "Student Management",
         },
         {
-          to: "/super-admin/dashboard#interns",
-          label: "Intern Management",
-          icon: Users,
-          title: "Intern Management",
+          to: "/super-admin/dashboard#admins",
+          label: "Admins",
+          icon: ShieldCheck,
+          title: "Admin Management",
         },
         {
           to: "/super-admin/dashboard#problems",
@@ -143,40 +164,46 @@ function AppShellInner({ children }: { children: ReactNode }) {
           title: "Problem Statements",
         },
         {
-          to: "/super-admin/dashboard#colleges",
-          label: "Colleges",
+          to: "/super-admin/dashboard#questionnaire",
+          label: "Questionnaire",
+          icon: HelpCircle,
+          title: "Questionnaire Management",
+        },
+        {
+          to: "/super-admin/dashboard#lms",
+          label: "LMS Monitoring",
+          icon: BookOpen,
+          title: "LMS Monitoring",
+        },
+        {
+          to: "/super-admin/dashboard#activities",
+          label: "Activities",
+          icon: Sparkles,
+          title: "Onboarding Activities",
+        },
+        {
+          to: "/super-admin/dashboard#interview",
+          label: "Interview",
+          icon: Calendar,
+          title: "1-to-1 Interviews",
+        },
+        {
+          to: "/super-admin/dashboard#internships",
+          label: "Internships",
           icon: Building2,
-          title: "Colleges",
+          title: "Internship Management",
         },
         {
-          to: "/super-admin/dashboard#live-attendance",
-          label: "Live Attendance",
-          icon: Activity,
-          title: "Live Attendance",
-        },
-        {
-          to: "/super-admin/dashboard#sessions",
-          label: "Attendance Sessions",
-          icon: Clock,
-          title: "Attendance Sessions",
-        },
-        {
-          to: "/super-admin/dashboard#reports",
-          label: "Attendance Reports",
-          icon: FileSpreadsheet,
-          title: "Attendance Reports",
-        },
-        {
-          to: "/super-admin/dashboard#holidays",
-          label: "Holiday Management",
-          icon: CalendarOff,
-          title: "Holiday Management",
+          to: "/super-admin/dashboard#announcements",
+          label: "Announcements",
+          icon: Send,
+          title: "Announcements",
         },
         {
           to: "/super-admin/dashboard#analytics",
           label: "Analytics",
           icon: PieChart,
-          title: "Analytics",
+          title: "Analytics & Reports",
         },
         {
           to: "/super-admin/dashboard#notifications",
@@ -185,11 +212,13 @@ function AppShellInner({ children }: { children: ReactNode }) {
           title: "Notifications",
         },
         {
-          to: "/super-admin/dashboard#settings",
-          label: "Settings",
-          icon: Settings,
-          title: "Settings",
+          to: "/super-admin/dashboard#profile",
+          label: "Profile",
+          icon: User,
+          title: "Super Admin Profile",
         },
+        { to: "/super-admin/dashboard#settings", label: "Settings", icon: Settings, title: "Settings" },
+        { to: "/support", label: "Help & Support", icon: HelpCircle, title: "Help & Support" },
       ];
     }
     return [
@@ -209,6 +238,7 @@ function AppShellInner({ children }: { children: ReactNode }) {
       },
       { to: "/profile", label: "Profile", icon: User, title: "Profile" },
       { to: "/settings", label: "Settings", icon: Settings, title: "Settings" },
+      { to: "/support", label: "Help & Support", icon: HelpCircle, title: "Help & Support" },
     ];
   }, [role]);
 

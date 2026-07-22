@@ -12,19 +12,25 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as UnauthorizedRouteImport } from './routes/unauthorized'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedTodoRouteImport } from './routes/_authenticated/todo'
+import { Route as AuthenticatedSupportRouteImport } from './routes/_authenticated/support'
 import { Route as AuthenticatedSocialRouteImport } from './routes/_authenticated/social'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedQuestionnaireRouteImport } from './routes/_authenticated/questionnaire'
+import { Route as AuthenticatedProjectAllocationRouteImport } from './routes/_authenticated/project-allocation'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedPendingWorkRouteImport } from './routes/_authenticated/pending-work'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedLmsIntegrationRouteImport } from './routes/_authenticated/lms-integration'
 import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
+import { Route as AuthenticatedInteractionRouteImport } from './routes/_authenticated/interaction'
 import { Route as AuthenticatedFeedbackSuggestionsRouteImport } from './routes/_authenticated/feedback-suggestions'
 import { Route as AuthenticatedDiaryRouteImport } from './routes/_authenticated/diary'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCommunityRouteImport } from './routes/_authenticated/community'
 import { Route as AuthenticatedAttendanceRouteImport } from './routes/_authenticated/attendance'
+import { Route as AuthenticatedActivitiesRouteImport } from './routes/_authenticated/activities'
 import { Route as AuthenticatedUIdRouteImport } from './routes/_authenticated/u/$id'
 import { Route as AuthenticatedSuperAdminDashboardRouteImport } from './routes/_authenticated/super-admin/dashboard'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin/dashboard'
@@ -43,14 +49,19 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedTodoRoute = AuthenticatedTodoRouteImport.update({
   id: '/todo',
   path: '/todo',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSupportRoute = AuthenticatedSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSocialRoute = AuthenticatedSocialRouteImport.update({
@@ -63,6 +74,18 @@ const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedQuestionnaireRoute =
+  AuthenticatedQuestionnaireRouteImport.update({
+    id: '/questionnaire',
+    path: '/questionnaire',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedProjectAllocationRoute =
+  AuthenticatedProjectAllocationRouteImport.update({
+    id: '/project-allocation',
+    path: '/project-allocation',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -79,10 +102,22 @@ const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedLmsIntegrationRoute =
+  AuthenticatedLmsIntegrationRouteImport.update({
+    id: '/lms-integration',
+    path: '/lms-integration',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLeaderboardRoute =
   AuthenticatedLeaderboardRouteImport.update({
     id: '/leaderboard',
     path: '/leaderboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedInteractionRoute =
+  AuthenticatedInteractionRouteImport.update({
+    id: '/interaction',
+    path: '/interaction',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedFeedbackSuggestionsRoute =
@@ -111,6 +146,11 @@ const AuthenticatedAttendanceRoute = AuthenticatedAttendanceRouteImport.update({
   path: '/attendance',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedActivitiesRoute = AuthenticatedActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedUIdRoute = AuthenticatedUIdRouteImport.update({
   id: '/u/$id',
   path: '/u/$id',
@@ -130,63 +170,81 @@ const AuthenticatedAdminDashboardRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof AuthenticatedIndexRoute
+  '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/activities': typeof AuthenticatedActivitiesRoute
   '/attendance': typeof AuthenticatedAttendanceRoute
   '/community': typeof AuthenticatedCommunityRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diary': typeof AuthenticatedDiaryRoute
   '/feedback-suggestions': typeof AuthenticatedFeedbackSuggestionsRoute
+  '/interaction': typeof AuthenticatedInteractionRoute
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/lms-integration': typeof AuthenticatedLmsIntegrationRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/pending-work': typeof AuthenticatedPendingWorkRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/project-allocation': typeof AuthenticatedProjectAllocationRoute
+  '/questionnaire': typeof AuthenticatedQuestionnaireRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/social': typeof AuthenticatedSocialRoute
+  '/support': typeof AuthenticatedSupportRoute
   '/todo': typeof AuthenticatedTodoRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/super-admin/dashboard': typeof AuthenticatedSuperAdminDashboardRoute
   '/u/$id': typeof AuthenticatedUIdRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/activities': typeof AuthenticatedActivitiesRoute
   '/attendance': typeof AuthenticatedAttendanceRoute
   '/community': typeof AuthenticatedCommunityRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diary': typeof AuthenticatedDiaryRoute
   '/feedback-suggestions': typeof AuthenticatedFeedbackSuggestionsRoute
+  '/interaction': typeof AuthenticatedInteractionRoute
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/lms-integration': typeof AuthenticatedLmsIntegrationRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/pending-work': typeof AuthenticatedPendingWorkRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/project-allocation': typeof AuthenticatedProjectAllocationRoute
+  '/questionnaire': typeof AuthenticatedQuestionnaireRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/social': typeof AuthenticatedSocialRoute
+  '/support': typeof AuthenticatedSupportRoute
   '/todo': typeof AuthenticatedTodoRoute
-  '/': typeof AuthenticatedIndexRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/super-admin/dashboard': typeof AuthenticatedSuperAdminDashboardRoute
   '/u/$id': typeof AuthenticatedUIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/_authenticated/activities': typeof AuthenticatedActivitiesRoute
   '/_authenticated/attendance': typeof AuthenticatedAttendanceRoute
   '/_authenticated/community': typeof AuthenticatedCommunityRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/diary': typeof AuthenticatedDiaryRoute
   '/_authenticated/feedback-suggestions': typeof AuthenticatedFeedbackSuggestionsRoute
+  '/_authenticated/interaction': typeof AuthenticatedInteractionRoute
   '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/_authenticated/lms-integration': typeof AuthenticatedLmsIntegrationRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/pending-work': typeof AuthenticatedPendingWorkRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/project-allocation': typeof AuthenticatedProjectAllocationRoute
+  '/_authenticated/questionnaire': typeof AuthenticatedQuestionnaireRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/social': typeof AuthenticatedSocialRoute
+  '/_authenticated/support': typeof AuthenticatedSupportRoute
   '/_authenticated/todo': typeof AuthenticatedTodoRoute
-  '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
   '/_authenticated/super-admin/dashboard': typeof AuthenticatedSuperAdminDashboardRoute
   '/_authenticated/u/$id': typeof AuthenticatedUIdRoute
@@ -197,65 +255,84 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/unauthorized'
+    | '/activities'
     | '/attendance'
     | '/community'
     | '/dashboard'
     | '/diary'
     | '/feedback-suggestions'
+    | '/interaction'
     | '/leaderboard'
+    | '/lms-integration'
     | '/onboarding'
     | '/pending-work'
     | '/profile'
+    | '/project-allocation'
+    | '/questionnaire'
     | '/settings'
     | '/social'
+    | '/support'
     | '/todo'
     | '/admin/dashboard'
     | '/super-admin/dashboard'
     | '/u/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/auth'
     | '/unauthorized'
+    | '/activities'
     | '/attendance'
     | '/community'
     | '/dashboard'
     | '/diary'
     | '/feedback-suggestions'
+    | '/interaction'
     | '/leaderboard'
+    | '/lms-integration'
     | '/onboarding'
     | '/pending-work'
     | '/profile'
+    | '/project-allocation'
+    | '/questionnaire'
     | '/settings'
     | '/social'
+    | '/support'
     | '/todo'
-    | '/'
     | '/admin/dashboard'
     | '/super-admin/dashboard'
     | '/u/$id'
   id:
     | '__root__'
+    | '/'
     | '/_authenticated'
     | '/auth'
     | '/unauthorized'
+    | '/_authenticated/activities'
     | '/_authenticated/attendance'
     | '/_authenticated/community'
     | '/_authenticated/dashboard'
     | '/_authenticated/diary'
     | '/_authenticated/feedback-suggestions'
+    | '/_authenticated/interaction'
     | '/_authenticated/leaderboard'
+    | '/_authenticated/lms-integration'
     | '/_authenticated/onboarding'
     | '/_authenticated/pending-work'
     | '/_authenticated/profile'
+    | '/_authenticated/project-allocation'
+    | '/_authenticated/questionnaire'
     | '/_authenticated/settings'
     | '/_authenticated/social'
+    | '/_authenticated/support'
     | '/_authenticated/todo'
-    | '/_authenticated/'
     | '/_authenticated/admin/dashboard'
     | '/_authenticated/super-admin/dashboard'
     | '/_authenticated/u/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   UnauthorizedRoute: typeof UnauthorizedRoute
@@ -284,18 +361,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/': {
-      id: '/_authenticated/'
+    '/': {
+      id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/todo': {
       id: '/_authenticated/todo'
       path: '/todo'
       fullPath: '/todo'
       preLoaderRoute: typeof AuthenticatedTodoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/support': {
+      id: '/_authenticated/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof AuthenticatedSupportRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/social': {
@@ -310,6 +394,20 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/questionnaire': {
+      id: '/_authenticated/questionnaire'
+      path: '/questionnaire'
+      fullPath: '/questionnaire'
+      preLoaderRoute: typeof AuthenticatedQuestionnaireRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/project-allocation': {
+      id: '/_authenticated/project-allocation'
+      path: '/project-allocation'
+      fullPath: '/project-allocation'
+      preLoaderRoute: typeof AuthenticatedProjectAllocationRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/profile': {
@@ -333,11 +431,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/lms-integration': {
+      id: '/_authenticated/lms-integration'
+      path: '/lms-integration'
+      fullPath: '/lms-integration'
+      preLoaderRoute: typeof AuthenticatedLmsIntegrationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/leaderboard': {
       id: '/_authenticated/leaderboard'
       path: '/leaderboard'
       fullPath: '/leaderboard'
       preLoaderRoute: typeof AuthenticatedLeaderboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/interaction': {
+      id: '/_authenticated/interaction'
+      path: '/interaction'
+      fullPath: '/interaction'
+      preLoaderRoute: typeof AuthenticatedInteractionRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/feedback-suggestions': {
@@ -375,6 +487,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAttendanceRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/activities': {
+      id: '/_authenticated/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof AuthenticatedActivitiesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/u/$id': {
       id: '/_authenticated/u/$id'
       path: '/u/$id'
@@ -400,38 +519,48 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedActivitiesRoute: typeof AuthenticatedActivitiesRoute
   AuthenticatedAttendanceRoute: typeof AuthenticatedAttendanceRoute
   AuthenticatedCommunityRoute: typeof AuthenticatedCommunityRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDiaryRoute: typeof AuthenticatedDiaryRoute
   AuthenticatedFeedbackSuggestionsRoute: typeof AuthenticatedFeedbackSuggestionsRoute
+  AuthenticatedInteractionRoute: typeof AuthenticatedInteractionRoute
   AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
+  AuthenticatedLmsIntegrationRoute: typeof AuthenticatedLmsIntegrationRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedPendingWorkRoute: typeof AuthenticatedPendingWorkRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedProjectAllocationRoute: typeof AuthenticatedProjectAllocationRoute
+  AuthenticatedQuestionnaireRoute: typeof AuthenticatedQuestionnaireRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedSocialRoute: typeof AuthenticatedSocialRoute
+  AuthenticatedSupportRoute: typeof AuthenticatedSupportRoute
   AuthenticatedTodoRoute: typeof AuthenticatedTodoRoute
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAdminDashboardRoute: typeof AuthenticatedAdminDashboardRoute
   AuthenticatedSuperAdminDashboardRoute: typeof AuthenticatedSuperAdminDashboardRoute
   AuthenticatedUIdRoute: typeof AuthenticatedUIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedActivitiesRoute: AuthenticatedActivitiesRoute,
   AuthenticatedAttendanceRoute: AuthenticatedAttendanceRoute,
   AuthenticatedCommunityRoute: AuthenticatedCommunityRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDiaryRoute: AuthenticatedDiaryRoute,
   AuthenticatedFeedbackSuggestionsRoute: AuthenticatedFeedbackSuggestionsRoute,
+  AuthenticatedInteractionRoute: AuthenticatedInteractionRoute,
   AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
+  AuthenticatedLmsIntegrationRoute: AuthenticatedLmsIntegrationRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedPendingWorkRoute: AuthenticatedPendingWorkRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedProjectAllocationRoute: AuthenticatedProjectAllocationRoute,
+  AuthenticatedQuestionnaireRoute: AuthenticatedQuestionnaireRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedSocialRoute: AuthenticatedSocialRoute,
+  AuthenticatedSupportRoute: AuthenticatedSupportRoute,
   AuthenticatedTodoRoute: AuthenticatedTodoRoute,
-  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAdminDashboardRoute: AuthenticatedAdminDashboardRoute,
   AuthenticatedSuperAdminDashboardRoute: AuthenticatedSuperAdminDashboardRoute,
   AuthenticatedUIdRoute: AuthenticatedUIdRoute,
@@ -441,6 +570,7 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   UnauthorizedRoute: UnauthorizedRoute,

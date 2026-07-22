@@ -279,6 +279,34 @@ function AdminDashboard() {
               />
             )}
 
+            {activeTab === "questionnaire" && (
+              <AdminQuestionnaireView interns={assignedInterns} />
+            )}
+
+            {activeTab === "lms" && (
+              <AdminLmsView interns={assignedInterns} />
+            )}
+
+            {activeTab === "activities" && (
+              <AdminActivitiesView interns={assignedInterns} onUpdate={saveInterns} />
+            )}
+
+            {activeTab === "interview" && (
+              <AdminInterviewView interns={assignedInterns} currentAdmin={currentAdmin} onUpdate={saveInterns} />
+            )}
+
+            {activeTab === "internship" && (
+              <AdminInternshipView interns={assignedInterns} problems={assignedProblems} />
+            )}
+
+            {activeTab === "announcements" && (
+              <AdminAnnouncementsView interns={assignedInterns} />
+            )}
+
+            {activeTab === "profile" && (
+              <AdminProfileView currentAdmin={currentAdmin} problems={assignedProblems} />
+            )}
+
             {activeTab === "notifications" && <AdminNotificationsView />}
 
             {activeTab === "settings" && <AdminSettingsView />}
@@ -1406,29 +1434,6 @@ function AdminSettingsView() {
             className="rounded border-border text-primary focus:ring-primary size-4"
           />
         </label>
-
-        <label className="flex items-center justify-between text-xs font-medium text-foreground cursor-pointer select-none border-t border-border pt-4">
-          <div>
-            <span className="font-bold">Password Requirement for Standups</span>
-            <span className="text-[9px] text-muted-foreground block mt-0.5">
-              Enforce password check verification during morning meetings.
-            </span>
-          </div>
-          <input
-            type="checkbox"
-            defaultChecked
-            className="rounded border-border text-primary focus:ring-primary size-4"
-          />
-        </label>
-
-        <div className="flex justify-end pt-4 border-t border-border">
-          <button
-            onClick={() => toast.success("Rules saved successfully")}
-            className="px-5 py-2 rounded-xl bg-primary text-white text-xs font-semibold border-none cursor-pointer"
-          >
-            Save Settings
-          </button>
-        </div>
       </div>
     </div>
   );

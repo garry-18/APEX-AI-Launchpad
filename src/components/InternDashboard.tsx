@@ -26,7 +26,7 @@ export function InternDashboard() {
         await Promise.all([
           supabase
             .from("profiles")
-            .select("full_name, community_points, attendance_points")
+            .select("full_name, community_points, attendance_points, onboarding_completed, problem_statement, assigned_admin")
             .eq("id", uid)
             .maybeSingle(),
           supabase.from("ai_analysis").select("overall_score").eq("user_id", uid).maybeSingle(),
@@ -153,6 +153,9 @@ export function InternDashboard() {
         presentDays,
         elapsed,
         rank,
+        onboardingCompleted: profile?.onboarding_completed,
+        problemStatement: profile?.problem_statement,
+        assignedAdmin: profile?.assigned_admin,
       };
     },
   });
@@ -162,14 +165,40 @@ export function InternDashboard() {
   return (
     <AppShell>
       <div className="space-y-10">
-        <header>
-          <h2 className="text-3xl font-bold tracking-tight">
-            Welcome back, {d?.name ?? "…"}{" "}
-            <span className="inline-block animate-[wave_2s_ease-in-out_infinite] origin-[70%_70%]">
-              👋
-            </span>
-          </h2>
-          <p className="text-muted-foreground mt-2">Here's a snapshot of your progress today.</p>
+        <header className="space-y-4">
+          {d?.onboardingCompleted && (
+            <div className="bg-orange-50/80 border border-orange-200 rounded-3xl p-6 shadow-sm space-y-2 animate-in fade-in duration-300">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#FF6B00] uppercase tracking-wider">
+                <Sparkles className="size-4" /> Welcome to Your Internship Journey!
+              </div>
+              <h1 className="text-2xl font-extrabold text-gray-900">
+                Congratulations on successfully completing your onboarding!
+              </h1>
+              <p className="text-sm text-gray-600">
+                You have been assigned to work on your dedicated Problem Statement below.
+              </p>
+              {d?.problemStatement && (
+                <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold text-gray-700">
+                  <span className="bg-white px-3 py-1.5 rounded-xl border border-orange-200">
+                    Problem Statement: <strong>{d.problemStatement}</strong>
+                  </span>
+                  <span className="bg-white px-3 py-1.5 rounded-xl border border-orange-200">
+                    Assigned Admin: <strong>{d.assignedAdmin || "Sarah Jenkins"}</strong>
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight">
+              Welcome back, {d?.name ?? "…"}{" "}
+              <span className="inline-block animate-[wave_2s_ease-in-out_infinite] origin-[70%_70%]">
+                👋
+              </span>
+            </h2>
+            <p className="text-muted-foreground mt-2">Here's a snapshot of your progress today.</p>
+          </div>
         </header>
 
         <section className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">

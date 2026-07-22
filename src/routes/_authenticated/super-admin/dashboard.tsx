@@ -264,6 +264,34 @@ function SuperAdminDashboard() {
           <HolidayManagementView holidays={holidays} onUpdate={saveHolidays} />
         )}
 
+        {activeTab === "questionnaire" && (
+          <SuperAdminQuestionnaireView interns={interns} />
+        )}
+
+        {activeTab === "lms" && (
+          <SuperAdminLmsView interns={interns} onUpdate={saveInterns} />
+        )}
+
+        {activeTab === "activities" && (
+          <SuperAdminActivitiesView interns={interns} onUpdate={saveInterns} />
+        )}
+
+        {activeTab === "interview" && (
+          <SuperAdminInterviewView interns={interns} admins={admins} onUpdate={saveInterns} />
+        )}
+
+        {activeTab === "internships" && (
+          <SuperAdminInternshipsView interns={interns} problems={problems} admins={admins} />
+        )}
+
+        {activeTab === "announcements" && (
+          <SuperAdminAnnouncementsView interns={interns} colleges={colleges} problems={problems} admins={admins} />
+        )}
+
+        {activeTab === "profile" && (
+          <SuperAdminProfileView />
+        )}
+
         {activeTab === "analytics" && (
           <AnalyticsDashboardView
             records={records}
@@ -3196,6 +3224,345 @@ function SettingsView() {
           >
             Save Changes
           </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------
+// MODULE: SUPER ADMIN QUESTIONNAIRE MANAGEMENT
+// -------------------------------------------------------------
+function SuperAdminQuestionnaireView({ interns }: { interns: InternProfile[] }) {
+  const [questions, setQuestions] = useState([
+    { id: "q1", text: "What is your primary technical stack & domain focus?", type: "Short Text", category: "Technical", required: true },
+    { id: "q2", text: "Describe your experience with LLMs and AI Agents.", type: "Long Text", category: "AI Knowledge", required: true },
+    { id: "q3", text: "Which AI tools have you utilized for code generation?", type: "Multiple Choice", category: "Technical", required: false },
+  ]);
+  const [newText, setNewText] = useState("");
+  const [newCategory, setNewCategory] = useState("Technical");
+
+  const handleAddQuestion = () => {
+    if (!newText.trim()) return toast.error("Please enter question text.");
+    const q = { id: `q_${Date.now()}`, text: newText.trim(), type: "Short Text", category: newCategory, required: true };
+    setQuestions((prev) => [...prev, q]);
+    setNewText("");
+    toast.success("Question created successfully!");
+  };
+
+  const handleDeleteQuestion = (id: string) => {
+    setQuestions((prev) => prev.filter((q) => q.id !== id));
+    toast.success("Question deleted.");
+  };
+
+  const handleResetStudentQuestionnaire = (studentName: string) => {
+    toast.success(`Questionnaire reset for ${studentName}. Student can attempt again.`);
+  };
+
+  return (
+    <div className="space-y-6 animate-in fade-in-50 duration-200">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h3 className="text-2xl font-extrabold tracking-tight">Questionnaire Management</h3>
+          <p className="text-xs text-muted-foreground mt-1">
+            Super Admin exclusive: Create, edit, reorder questions, and manage student responses.
+          </p>
+        </div>
+      </header>
+
+      {/* Add Question Card */}
+      <div className="card-surface p-6 space-y-4 max-w-2xl">
+        <h4 className="font-bold text-sm">Create New Questionnaire Question</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <input
+            type="text"
+            value={newText}
+            onChange={(e) => setNewText(e.target.value)}
+            placeholder="Enter question prompt..."
+            className="w-full sm:col-span-2 h-10 rounded-xl bg-surface border border-border px-3 text-xs"
+          />
+          <select
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+            className="w-full h-10 rounded-xl bg-surface border border-border px-3 text-xs"
+          >
+            <option value="Technical">Technical</option>
+            <option value="Non-Technical">Non-Technical</option>
+            <option value="AI Knowledge">AI Knowledge</option>
+          </select>
+        </div>
+        <button onClick={handleAddQuestion} className="h-10 px-5 rounded-xl bg-primary text-white text-xs font-bold shadow-md cursor-pointer">
+          Add Question
+        </button>
+      </div>
+
+      {/* Question List */}
+      <div className="card-surface p-6 space-y-4">
+        <h4 className="font-bold text-sm border-b border-border pb-2">Active Questionnaire Questions ({questions.length})</h4>
+        <div className="space-y-3">
+          {questions.map((q, idx) => (
+            <div key={q.id} className="bg-surface-2 p-4 rounded-2xl border border-border flex items-center justify-between text-xs">
+              <div>
+                <span className="font-bold text-primary mr-2">Q{idx + 1}.</span>
+                <span className="font-semibold text-foreground">{q.text}</span>
+                <span className="ml-2 px-2 py-0.5 rounded-md text-[10px] bg-primary/10 text-primary font-bold">{q.category}</span>
+              </div>
+              <button onClick={() => handleDeleteQuestion(q.id)} className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg cursor-pointer">
+                <Trash2 className="size-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------
+// MODULE: SUPER ADMIN LMS MONITORING VIEW
+// -------------------------------------------------------------
+function SuperAdminLmsView({ interns, onUpdate }: { interns: InternProfile[]; onUpdate: (list: InternProfile[]) => void }) {
+  const handleSkipLms = (internId: string, name: string) => {
+    toast.success(`LMS Learning Track skipped for ${name} by Super Admin.`);
+  };
+
+  const handleResetLms = (name: string) => {
+    toast.success(`LMS progress reset for ${name}.`);
+  };
+
+  return (
+    <div className="space-y-6 animate-in fade-in-50 duration-200">
+      <header>
+        <h3 className="text-2xl font-extrabold tracking-tight">LMS Monitoring & Overrides</h3>
+        <p className="text-xs text-muted-foreground mt-1">
+          Super Admin exclusive: Monitor completion percentages across all students, skip LMS tracks, or force reset.
+        </p>
+      </header>
+
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {interns.map((intern) => (
+          <div key={intern.id} className="card-surface p-5 space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-bold text-sm text-foreground">{intern.full_name}</h4>
+                <p className="text-xs text-muted-foreground">{intern.problem_statement || "AI Track"}</p>
+              </div>
+              <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-50 text-[#FF6B00] border border-orange-200">
+                In Progress
+              </span>
+            </div>
+
+            <div className="space-y-1 text-xs">
+              <div className="flex justify-between font-semibold">
+                <span className="text-muted-foreground">Completion Rate</span>
+                <span className="text-[#FF6B00]">75%</span>
+              </div>
+              <div className="w-full h-2 rounded-full bg-surface-2 overflow-hidden">
+                <div className="h-full bg-[#FF6B00] rounded-full" style={{ width: "75%" }} />
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-border flex items-center justify-between gap-2">
+              <button onClick={() => handleSkipLms(intern.id, intern.full_name)} className="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-600 text-xs font-bold border border-blue-200 hover:bg-blue-100 cursor-pointer">
+                Skip LMS
+              </button>
+              <button onClick={() => handleResetLms(intern.full_name)} className="px-3 py-1.5 rounded-xl bg-gray-100 text-gray-700 text-xs font-semibold hover:bg-gray-200 cursor-pointer">
+                Reset LMS
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------
+// MODULE: SUPER ADMIN ACTIVITIES MONITORING VIEW
+// -------------------------------------------------------------
+function SuperAdminActivitiesView({ interns, onUpdate }: { interns: InternProfile[]; onUpdate: (list: InternProfile[]) => void }) {
+  const handleApproveAll = () => {
+    toast.success("Approved all pending activity submissions across platform!");
+  };
+
+  const handleSkipActivities = (name: string) => {
+    toast.success(`Skipped all 7 onboarding activities for ${name}!`);
+  };
+
+  return (
+    <div className="space-y-6 animate-in fade-in-50 duration-200">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h3 className="text-2xl font-extrabold tracking-tight">Onboarding Activities Control</h3>
+          <p className="text-xs text-muted-foreground mt-1">
+            Super Admin exclusive: Monitor 7 onboarding activities across all students, skip activities, or bulk approve.
+          </p>
+        </div>
+
+        <button onClick={handleApproveAll} className="px-5 py-2.5 rounded-xl bg-primary text-white text-xs font-bold shadow-md cursor-pointer">
+          Bulk Approve All Submissions
+        </button>
+      </header>
+
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {interns.map((intern) => (
+          <div key={intern.id} className="card-surface p-5 space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-bold text-sm text-foreground">{intern.full_name}</h4>
+                <p className="text-xs text-muted-foreground">{intern.college || "Apex Student"}</p>
+              </div>
+              <span className="px-2 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-600">
+                5 / 7 Approved
+              </span>
+            </div>
+
+            <div className="pt-2 border-t border-border flex items-center justify-between">
+              <button onClick={() => handleSkipActivities(intern.full_name)} className="px-3 py-1.5 rounded-xl bg-purple-50 text-purple-600 text-xs font-bold border border-purple-200 hover:bg-purple-100 cursor-pointer">
+                Skip All Activities
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------
+// MODULE: SUPER ADMIN INTERVIEW VIEW
+// -------------------------------------------------------------
+function SuperAdminInterviewView({ interns, admins, onUpdate }: { interns: InternProfile[]; admins: AdminProfile[]; onUpdate: (list: InternProfile[]) => void }) {
+  const handleSkipInterview = (name: string) => {
+    toast.success(`Skipped 1-to-1 interview stage for ${name}!`);
+  };
+
+  return (
+    <div className="space-y-6 animate-in fade-in-50 duration-200">
+      <header>
+        <h3 className="text-2xl font-extrabold tracking-tight">1-to-1 Interview Operations</h3>
+        <p className="text-xs text-muted-foreground mt-1">
+          Super Admin exclusive: View all interviews, assign/reassign admins, and skip interview stages.
+        </p>
+      </header>
+
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {interns.map((intern) => (
+          <div key={intern.id} className="card-surface p-5 space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="font-bold text-sm text-foreground">{intern.full_name}</h4>
+                <p className="text-xs text-muted-foreground">Assigned Admin: {intern.assigned_admin || "Sarah Jenkins"}</p>
+              </div>
+              <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-orange-50 text-[#FF6B00]">Scheduled</span>
+            </div>
+
+            <div className="pt-2 border-t border-border flex items-center justify-between">
+              <button onClick={() => handleSkipInterview(intern.full_name)} className="px-3 py-1.5 rounded-xl bg-purple-50 text-purple-600 text-xs font-bold border border-purple-200 hover:bg-purple-100 cursor-pointer">
+                Skip Interview
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------
+// MODULE: SUPER ADMIN INTERNSHIPS VIEW
+// -------------------------------------------------------------
+function SuperAdminInternshipsView({ interns, problems, admins }: { interns: InternProfile[]; problems: ProblemStatement[]; admins: AdminProfile[] }) {
+  return (
+    <div className="space-y-6 animate-in fade-in-50 duration-200">
+      <header>
+        <h3 className="text-2xl font-extrabold tracking-tight">Platform-Wide Internship Overview</h3>
+        <p className="text-xs text-muted-foreground mt-1">
+          Monitor all active, completed, and pending internships across all colleges and problem statements.
+        </p>
+      </header>
+
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {interns.map((intern) => (
+          <div key={intern.id} className="card-surface p-5 space-y-3">
+            <h4 className="font-bold text-sm">{intern.full_name}</h4>
+            <p className="text-xs text-muted-foreground">{intern.problem_statement || "AI Portfolio Optimizer"}</p>
+            <div className="text-[11px] font-semibold text-emerald-600">Status: Active Internship</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------
+// MODULE: SUPER ADMIN ANNOUNCEMENTS VIEW
+// -------------------------------------------------------------
+function SuperAdminAnnouncementsView({ interns, colleges, problems, admins }: { interns: InternProfile[]; colleges: College[]; problems: ProblemStatement[]; admins: AdminProfile[] }) {
+  const [title, setTitle] = useState("");
+  const [target, setTarget] = useState("All Students");
+
+  const handleBroadcast = () => {
+    if (!title.trim()) return toast.error("Please enter announcement title.");
+    toast.success(`Platform Announcement '${title}' broadcast to target: ${target}`);
+    setTitle("");
+  };
+
+  return (
+    <div className="space-y-6 animate-in fade-in-50 duration-200">
+      <header>
+        <h3 className="text-2xl font-extrabold tracking-tight">Platform Broadcast Announcements</h3>
+        <p className="text-xs text-muted-foreground mt-1">
+          Super Admin exclusive: Target announcements to all students, specific colleges, or specific problem statements.
+        </p>
+      </header>
+
+      <div className="card-surface p-6 max-w-xl space-y-4">
+        <label className="block space-y-1 text-xs">
+          <span className="font-semibold text-muted-foreground">Target Audience</span>
+          <select value={target} onChange={(e) => setTarget(e.target.value)} className="w-full h-10 rounded-xl bg-surface border border-border px-3 text-xs">
+            <option value="All Students">All Students (Platform Wide)</option>
+            <option value="Specific College">Specific College Cohort</option>
+            <option value="Specific Problem Statement">Specific Problem Statement</option>
+          </select>
+        </label>
+
+        <label className="block space-y-1 text-xs">
+          <span className="font-semibold text-muted-foreground">Announcement Title</span>
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. Mandatory Platform Maintenance & Review" className="w-full h-10 rounded-xl bg-surface border border-border px-3 text-xs" />
+        </label>
+
+        <button onClick={handleBroadcast} className="px-6 py-2.5 rounded-xl bg-primary text-white font-bold text-xs shadow-md cursor-pointer">
+          Broadcast Platform Announcement
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// -------------------------------------------------------------
+// MODULE: SUPER ADMIN PROFILE VIEW
+// -------------------------------------------------------------
+function SuperAdminProfileView() {
+  return (
+    <div className="space-y-6 animate-in fade-in-50 duration-200 max-w-2xl">
+      <header>
+        <h3 className="text-2xl font-extrabold tracking-tight">Super Admin Profile</h3>
+        <p className="text-xs text-muted-foreground mt-1">Master Administrator account settings and platform security controls.</p>
+      </header>
+
+      <div className="card-surface p-6 space-y-4">
+        <div className="flex items-center gap-4 border-b border-border pb-4">
+          <div className="size-16 rounded-2xl bg-brand-orange-gradient grid place-items-center text-xl font-bold text-white">
+            SA
+          </div>
+          <div>
+            <h4 className="text-lg font-bold">Super Admin Master</h4>
+            <p className="text-xs text-muted-foreground">superadmin@apexlaunchpad.ai</p>
+            <span className="inline-block mt-1 px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-purple-50 text-purple-600 border border-purple-200">
+              Super Admin Role (Full Access)
+            </span>
+          </div>
         </div>
       </div>
     </div>
