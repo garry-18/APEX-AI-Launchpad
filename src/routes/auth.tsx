@@ -78,9 +78,28 @@ function AuthPage() {
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data }) => {
       if (data.user) {
-        const role = await fetchUserRole(data.user.id);
-        const destination = role ? ROLE_HOME[role] : "/unauthorized";
-        navigate({ to: destination as any, replace: true });
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("onboarding_completed, role")
+          .eq("id", data.user.id)
+          .maybeSingle();
+
+        const userRole = profile?.role || "intern";
+        const onboardingCompleted = profile?.onboarding_completed ?? false;
+
+        if (userRole === "super_admin") {
+          navigate({ to: "/super-admin/dashboard", replace: true });
+        } else if (userRole === "admin") {
+          navigate({ to: "/admin/dashboard", replace: true });
+        } else if (userRole === "intern") {
+          if (!onboardingCompleted) {
+            navigate({ to: "/onboarding", replace: true });
+          } else {
+            navigate({ to: "/dashboard", replace: true });
+          }
+        } else {
+          navigate({ to: "/unauthorized", replace: true });
+        }
       }
     });
   }, [navigate]);

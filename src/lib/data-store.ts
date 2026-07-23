@@ -651,63 +651,13 @@ export const dataStore = {
   getHolidays: (): AttendanceHoliday[] => getOrInit("apex.holidays", DEFAULT_HOLIDAYS),
   setHolidays: async (list: AttendanceHoliday[]) => {
     setStore("apex.holidays", list);
-    try {
-      const local = getOrInit("apex.holidays", DEFAULT_HOLIDAYS);
-      const deleted = local.filter((l) => !list.some((item) => item.id === l.id));
-      for (const d of deleted) {
-        if (!d.id.startsWith("hol-")) {
-          await supabase.from("attendance_holidays").delete().eq("id", d.id);
-        }
-      }
-      for (const item of list) {
-        const payload = {
-          holiday_date: item.holiday_date,
-          title: item.title,
-          category: item.category,
-        };
-        if (item.id.startsWith("hol-")) {
-          await supabase.from("attendance_holidays").insert(payload);
-        } else {
-          await supabase.from("attendance_holidays").update(payload).eq("id", item.id);
-        }
-      }
-      await dataStore.syncWithSupabase();
-    } catch (err) {
-      console.error("Error saving holidays:", err);
-    }
+    // Suppressed: attendance_holidays table no longer exists in Supabase database
   },
 
   getAudits: (): AttendanceAuditLog[] => getOrInit("apex.audits", DEFAULT_AUDITS),
   setAudits: async (list: AttendanceAuditLog[]) => {
     setStore("apex.audits", list);
-    try {
-      const local = getOrInit("apex.audits", DEFAULT_AUDITS);
-      const deleted = local.filter((l) => !list.some((item) => item.id === l.id));
-      for (const d of deleted) {
-        if (!d.id.startsWith("audit-")) {
-          await supabase.from("attendance_audit_logs").delete().eq("id", d.id);
-        }
-      }
-      for (const item of list) {
-        const payload = {
-          record_id: item.record_id,
-          action_type: item.action_type,
-          old_status: item.old_status,
-          new_status: item.new_status,
-          reason: item.reason,
-          marked_by: item.marked_by,
-          created_at: item.created_at,
-        };
-        if (item.id.startsWith("audit-")) {
-          await supabase.from("attendance_audit_logs").insert(payload);
-        } else {
-          await supabase.from("attendance_audit_logs").update(payload).eq("id", item.id);
-        }
-      }
-      await dataStore.syncWithSupabase();
-    } catch (err) {
-      console.error("Error saving audits:", err);
-    }
+    // Suppressed: attendance_audit_logs table no longer exists in Supabase database
   },
 
   // Subscription helper for reactiveness across components
@@ -753,14 +703,6 @@ export const dataStore = {
           })
           .on("postgres_changes", { event: "*", schema: "public", table: "attendance_records" }, () => {
             console.log("[REALTIME] attendance_records table changed. Triggering syncWithSupabase...");
-            dataStore.syncWithSupabase();
-          })
-          .on("postgres_changes", { event: "*", schema: "public", table: "attendance_holidays" }, () => {
-            console.log("[REALTIME] attendance_holidays table changed. Triggering syncWithSupabase...");
-            dataStore.syncWithSupabase();
-          })
-          .on("postgres_changes", { event: "*", schema: "public", table: "attendance_audit_logs" }, () => {
-            console.log("[REALTIME] attendance_audit_logs table changed. Triggering syncWithSupabase...");
             dataStore.syncWithSupabase();
           })
           .subscribe();
@@ -1052,63 +994,11 @@ export const dataStore = {
         statusText: recsText,
       } = await recsQuery;
 
-      // 7. Fetch Holidays
-      const {
-        data: hols,
-        error: holsErr,
-        status: holsStat,
-        statusText: holsText,
-      } = await supabase.from("attendance_holidays").select("*");
-      if (holsErr) {
-        console.error("Fetch holidays error:", {
-          status: holsStat,
-          statusText: holsText,
-          error: {
-            code: holsErr.code,
-            message: holsErr.message,
-            details: holsErr.details,
-            hint: holsErr.hint,
-          },
-        });
-      }
-      const mappedHolidays: AttendanceHoliday[] = (hols || []).map((h: any) => ({
-        id: h.id,
-        holiday_date: h.holiday_date,
-        title: h.title,
-        category: h.category as any,
-      }));
-      setStore("apex.holidays", mappedHolidays);
+      // 7. Fetch Holidays (Suppressed: Table no longer exists in DB)
+      setStore("apex.holidays", DEFAULT_HOLIDAYS);
 
-      // 8. Fetch Audits
-      const {
-        data: auds,
-        error: audsErr,
-        status: audsStat,
-        statusText: audsText,
-      } = await supabase.from("attendance_audit_logs").select("*");
-      if (audsErr) {
-        console.error("Fetch audits error:", {
-          status: audsStat,
-          statusText: audsText,
-          error: {
-            code: audsErr.code,
-            message: audsErr.message,
-            details: audsErr.details,
-            hint: audsErr.hint,
-          },
-        });
-      }
-      const mappedAudits: AttendanceAuditLog[] = (auds || []).map((a: any) => ({
-        id: a.id,
-        record_id: a.record_id,
-        action_type: a.action_type,
-        old_status: a.old_status,
-        new_status: a.new_status,
-        reason: a.reason,
-        marked_by: a.marked_by,
-        created_at: a.created_at,
-      }));
-      setStore("apex.audits", mappedAudits);
+      // 8. Fetch Audits (Suppressed: Table no longer exists in DB)
+      setStore("apex.audits", DEFAULT_AUDITS);
     } catch (err) {
       console.error("Error syncing with Supabase:", err);
     }

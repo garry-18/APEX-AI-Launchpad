@@ -71,30 +71,30 @@ export async function fetchUserRole(userId: string, supabaseClient?: any): Promi
 export function isRoleAllowed(role: Role | null, pathname: string): boolean {
   if (!role) return false;
 
-  // Shared paths accessible by all authenticated roles
+  // Shared paths accessible by all authenticated roles (exact match or subdirectory match)
   const isSharedPath =
-    pathname.startsWith("/profile") ||
-    pathname.startsWith("/settings") ||
-    pathname.startsWith("/support") ||
-    pathname.startsWith("/pending-work") ||
-    pathname.startsWith("/feedback-suggestions") ||
-    pathname.startsWith("/leaderboard") ||
+    pathname === "/profile" || pathname.startsWith("/profile/") ||
+    pathname === "/settings" || pathname.startsWith("/settings/") ||
+    pathname === "/support" || pathname.startsWith("/support/") ||
+    pathname === "/pending-work" || pathname.startsWith("/pending-work/") ||
+    pathname === "/feedback-suggestions" || pathname.startsWith("/feedback-suggestions/") ||
+    pathname === "/leaderboard" || pathname.startsWith("/leaderboard/") ||
     pathname.startsWith("/u/");
 
   if (isSharedPath) return true;
 
   if (role === ROLES.ADMIN) {
-    // Admin: own dashboard routes only (not intern-only or super-admin routes)
-    return pathname.startsWith("/admin");
+    // Admin: access admin routes, cannot access super admin routes
+    return pathname.startsWith("/admin") && !pathname.startsWith("/super-admin");
   }
 
   if (role === ROLES.SUPERADMIN) {
-    // Super admin: own dashboard routes only (not intern-only or admin routes)
-    return pathname.startsWith("/super-admin");
+    // Super Admin: access both admin and super admin modules
+    return pathname.startsWith("/super-admin") || pathname.startsWith("/admin");
   }
 
   if (role === ROLES.INTERN) {
-    // Intern: any non-admin, non-super-admin path (including /dashboard, /, /todo, etc.)
+    // Intern: any non-admin, non-super-admin path
     return !pathname.startsWith("/admin") && !pathname.startsWith("/super-admin");
   }
 
