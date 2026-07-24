@@ -223,11 +223,11 @@ function AppShellInner({ children }: { children: ReactNode }) {
     }
     return [
       { to: "/", label: "Dashboard", icon: LayoutGrid, title: "Dashboard" },
-      { to: "/attendance", label: "Attendance", icon: CalendarCheck, title: "Attendance" },
+      { to: "/student/attendance", label: "Attendance", icon: CalendarCheck, title: "Attendance" },
       { to: "/social", label: "Social Posting", icon: Send, title: "Social Posting" },
       { to: "/todo", label: "Todo List", icon: CheckSquare, title: "Todo List" },
-      { to: "/leaderboard", label: "Leaderboard", icon: Trophy, title: "Leaderboard" },
-      { to: "/community", label: "Community", icon: MessageSquare, title: "Community" },
+      { to: "/student/leaderboard", label: "Leaderboard", icon: Trophy, title: "Leaderboard" },
+      { to: "/student/announcements", label: "Announcements", icon: MessageSquare, title: "Announcements" },
       { to: "/diary", label: "Daily Diary", icon: BookOpen, title: "Daily Diary" },
       { to: "/pending-work", label: "Pending Work", icon: Briefcase, title: "Pending Work" },
       {

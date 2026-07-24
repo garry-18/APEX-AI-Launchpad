@@ -23,12 +23,10 @@ import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedPendingWorkRouteImport } from './routes/_authenticated/pending-work'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedLmsIntegrationRouteImport } from './routes/_authenticated/lms-integration'
-import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
 import { Route as AuthenticatedInteractionRouteImport } from './routes/_authenticated/interaction'
 import { Route as AuthenticatedFeedbackSuggestionsRouteImport } from './routes/_authenticated/feedback-suggestions'
 import { Route as AuthenticatedDiaryRouteImport } from './routes/_authenticated/diary'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedCommunityRouteImport } from './routes/_authenticated/community'
 import { Route as AuthenticatedAttendanceRouteImport } from './routes/_authenticated/attendance'
 import { Route as AuthenticatedActivitiesRouteImport } from './routes/_authenticated/activities'
 import { Route as AuthenticatedUIdRouteImport } from './routes/_authenticated/u/$id'
@@ -38,33 +36,35 @@ import { Route as AuthenticatedSuperAdminQuestionnairesRouteImport } from './rou
 import { Route as AuthenticatedSuperAdminProblemStatementsRouteImport } from './routes/_authenticated/super-admin/problem-statements'
 import { Route as AuthenticatedSuperAdminPendingWorkRouteImport } from './routes/_authenticated/super-admin/pending-work'
 import { Route as AuthenticatedSuperAdminLmsRouteImport } from './routes/_authenticated/super-admin/lms'
-import { Route as AuthenticatedSuperAdminLeaderboardRouteImport } from './routes/_authenticated/super-admin/leaderboard'
 import { Route as AuthenticatedSuperAdminDashboardRouteImport } from './routes/_authenticated/super-admin/dashboard'
 import { Route as AuthenticatedSuperAdminDailyDiaryRouteImport } from './routes/_authenticated/super-admin/daily-diary'
-import { Route as AuthenticatedSuperAdminAnnouncementsRouteImport } from './routes/_authenticated/super-admin/announcements'
-import { Route as AuthenticatedSuperAdminAiAnalysisRouteImport } from './routes/_authenticated/super-admin/ai-analysis'
 import { Route as AuthenticatedSuperAdminAdminManagementRouteImport } from './routes/_authenticated/super-admin/admin-management'
 import { Route as AuthenticatedSuperAdminActivitiesRouteImport } from './routes/_authenticated/super-admin/activities'
+import { Route as AuthenticatedStudentLeaderboardRouteImport } from './routes/_authenticated/student.leaderboard'
 import { Route as AuthenticatedStudentAttendanceRouteImport } from './routes/_authenticated/student.attendance'
+import { Route as AuthenticatedStudentAnnouncementsRouteImport } from './routes/_authenticated/student.announcements'
 import { Route as AuthenticatedAdminTodoRouteImport } from './routes/_authenticated/admin/todo'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
 import { Route as AuthenticatedAdminQuestionnairesRouteImport } from './routes/_authenticated/admin/questionnaires'
 import { Route as AuthenticatedAdminPendingWorkRouteImport } from './routes/_authenticated/admin/pending-work'
 import { Route as AuthenticatedAdminLmsRouteImport } from './routes/_authenticated/admin/lms'
-import { Route as AuthenticatedAdminLeaderboardRouteImport } from './routes/_authenticated/admin/leaderboard'
 import { Route as AuthenticatedAdminDashboardRouteImport } from './routes/_authenticated/admin/dashboard'
 import { Route as AuthenticatedAdminDailyDiaryRouteImport } from './routes/_authenticated/admin/daily-diary'
-import { Route as AuthenticatedAdminAnnouncementsRouteImport } from './routes/_authenticated/admin/announcements'
-import { Route as AuthenticatedAdminAiAnalysisRouteImport } from './routes/_authenticated/admin/ai-analysis'
 import { Route as AuthenticatedAdminActivitiesRouteImport } from './routes/_authenticated/admin/activities'
 import { Route as AuthenticatedSuperAdminOperationsInteractionsRouteImport } from './routes/_authenticated/super-admin/operations.interactions'
 import { Route as AuthenticatedSuperAdminOperationsAttendanceRouteImport } from './routes/_authenticated/super-admin/operations.attendance'
 import { Route as AuthenticatedSuperAdminInternsOnboardingRouteImport } from './routes/_authenticated/super-admin/interns.onboarding'
 import { Route as AuthenticatedSuperAdminInternsActiveRouteImport } from './routes/_authenticated/super-admin/interns.active'
+import { Route as AuthenticatedSuperAdminCommunityPostGeneratorRouteImport } from './routes/_authenticated/super-admin/community.post-generator'
+import { Route as AuthenticatedSuperAdminCommunityLeaderboardRouteImport } from './routes/_authenticated/super-admin/community.leaderboard'
+import { Route as AuthenticatedSuperAdminCommunityAnnouncementsRouteImport } from './routes/_authenticated/super-admin/community.announcements'
 import { Route as AuthenticatedAdminOperationsInteractionsRouteImport } from './routes/_authenticated/admin/operations.interactions'
 import { Route as AuthenticatedAdminOperationsAttendanceRouteImport } from './routes/_authenticated/admin/operations.attendance'
 import { Route as AuthenticatedAdminInternsOnboardingRouteImport } from './routes/_authenticated/admin/interns.onboarding'
 import { Route as AuthenticatedAdminInternsActiveRouteImport } from './routes/_authenticated/admin/interns.active'
+import { Route as AuthenticatedAdminCommunityPostGeneratorRouteImport } from './routes/_authenticated/admin/community.post-generator'
+import { Route as AuthenticatedAdminCommunityLeaderboardRouteImport } from './routes/_authenticated/admin/community.leaderboard'
+import { Route as AuthenticatedAdminCommunityAnnouncementsRouteImport } from './routes/_authenticated/admin/community.announcements'
 
 const UnauthorizedRoute = UnauthorizedRouteImport.update({
   id: '/unauthorized',
@@ -139,12 +139,6 @@ const AuthenticatedLmsIntegrationRoute =
     path: '/lms-integration',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedLeaderboardRoute =
-  AuthenticatedLeaderboardRouteImport.update({
-    id: '/leaderboard',
-    path: '/leaderboard',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedInteractionRoute =
   AuthenticatedInteractionRouteImport.update({
     id: '/interaction',
@@ -165,11 +159,6 @@ const AuthenticatedDiaryRoute = AuthenticatedDiaryRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedCommunityRoute = AuthenticatedCommunityRouteImport.update({
-  id: '/community',
-  path: '/community',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAttendanceRoute = AuthenticatedAttendanceRouteImport.update({
@@ -223,12 +212,6 @@ const AuthenticatedSuperAdminLmsRoute =
     path: '/super-admin/lms',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedSuperAdminLeaderboardRoute =
-  AuthenticatedSuperAdminLeaderboardRouteImport.update({
-    id: '/super-admin/leaderboard',
-    path: '/super-admin/leaderboard',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedSuperAdminDashboardRoute =
   AuthenticatedSuperAdminDashboardRouteImport.update({
     id: '/super-admin/dashboard',
@@ -239,18 +222,6 @@ const AuthenticatedSuperAdminDailyDiaryRoute =
   AuthenticatedSuperAdminDailyDiaryRouteImport.update({
     id: '/super-admin/daily-diary',
     path: '/super-admin/daily-diary',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedSuperAdminAnnouncementsRoute =
-  AuthenticatedSuperAdminAnnouncementsRouteImport.update({
-    id: '/super-admin/announcements',
-    path: '/super-admin/announcements',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedSuperAdminAiAnalysisRoute =
-  AuthenticatedSuperAdminAiAnalysisRouteImport.update({
-    id: '/super-admin/ai-analysis',
-    path: '/super-admin/ai-analysis',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedSuperAdminAdminManagementRoute =
@@ -265,10 +236,22 @@ const AuthenticatedSuperAdminActivitiesRoute =
     path: '/super-admin/activities',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedStudentLeaderboardRoute =
+  AuthenticatedStudentLeaderboardRouteImport.update({
+    id: '/student/leaderboard',
+    path: '/student/leaderboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedStudentAttendanceRoute =
   AuthenticatedStudentAttendanceRouteImport.update({
     id: '/student/attendance',
     path: '/student/attendance',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedStudentAnnouncementsRoute =
+  AuthenticatedStudentAnnouncementsRouteImport.update({
+    id: '/student/announcements',
+    path: '/student/announcements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminTodoRoute = AuthenticatedAdminTodoRouteImport.update({
@@ -299,12 +282,6 @@ const AuthenticatedAdminLmsRoute = AuthenticatedAdminLmsRouteImport.update({
   path: '/admin/lms',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAdminLeaderboardRoute =
-  AuthenticatedAdminLeaderboardRouteImport.update({
-    id: '/admin/leaderboard',
-    path: '/admin/leaderboard',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedAdminDashboardRoute =
   AuthenticatedAdminDashboardRouteImport.update({
     id: '/admin/dashboard',
@@ -315,18 +292,6 @@ const AuthenticatedAdminDailyDiaryRoute =
   AuthenticatedAdminDailyDiaryRouteImport.update({
     id: '/admin/daily-diary',
     path: '/admin/daily-diary',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminAnnouncementsRoute =
-  AuthenticatedAdminAnnouncementsRouteImport.update({
-    id: '/admin/announcements',
-    path: '/admin/announcements',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminAiAnalysisRoute =
-  AuthenticatedAdminAiAnalysisRouteImport.update({
-    id: '/admin/ai-analysis',
-    path: '/admin/ai-analysis',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminActivitiesRoute =
@@ -359,6 +324,24 @@ const AuthenticatedSuperAdminInternsActiveRoute =
     path: '/super-admin/interns/active',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedSuperAdminCommunityPostGeneratorRoute =
+  AuthenticatedSuperAdminCommunityPostGeneratorRouteImport.update({
+    id: '/super-admin/community/post-generator',
+    path: '/super-admin/community/post-generator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSuperAdminCommunityLeaderboardRoute =
+  AuthenticatedSuperAdminCommunityLeaderboardRouteImport.update({
+    id: '/super-admin/community/leaderboard',
+    path: '/super-admin/community/leaderboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSuperAdminCommunityAnnouncementsRoute =
+  AuthenticatedSuperAdminCommunityAnnouncementsRouteImport.update({
+    id: '/super-admin/community/announcements',
+    path: '/super-admin/community/announcements',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminOperationsInteractionsRoute =
   AuthenticatedAdminOperationsInteractionsRouteImport.update({
     id: '/admin/operations/interactions',
@@ -383,6 +366,24 @@ const AuthenticatedAdminInternsActiveRoute =
     path: '/admin/interns/active',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminCommunityPostGeneratorRoute =
+  AuthenticatedAdminCommunityPostGeneratorRouteImport.update({
+    id: '/admin/community/post-generator',
+    path: '/admin/community/post-generator',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminCommunityLeaderboardRoute =
+  AuthenticatedAdminCommunityLeaderboardRouteImport.update({
+    id: '/admin/community/leaderboard',
+    path: '/admin/community/leaderboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminCommunityAnnouncementsRoute =
+  AuthenticatedAdminCommunityAnnouncementsRouteImport.update({
+    id: '/admin/community/announcements',
+    path: '/admin/community/announcements',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -390,12 +391,10 @@ export interface FileRoutesByFullPath {
   '/unauthorized': typeof UnauthorizedRoute
   '/activities': typeof AuthenticatedActivitiesRoute
   '/attendance': typeof AuthenticatedAttendanceRoute
-  '/community': typeof AuthenticatedCommunityRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diary': typeof AuthenticatedDiaryRoute
   '/feedback-suggestions': typeof AuthenticatedFeedbackSuggestionsRoute
   '/interaction': typeof AuthenticatedInteractionRoute
-  '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/lms-integration': typeof AuthenticatedLmsIntegrationRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/pending-work': typeof AuthenticatedPendingWorkRoute
@@ -407,24 +406,20 @@ export interface FileRoutesByFullPath {
   '/support': typeof AuthenticatedSupportRoute
   '/todo': typeof AuthenticatedTodoRoute
   '/admin/activities': typeof AuthenticatedAdminActivitiesRoute
-  '/admin/ai-analysis': typeof AuthenticatedAdminAiAnalysisRoute
-  '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/daily-diary': typeof AuthenticatedAdminDailyDiaryRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
-  '/admin/leaderboard': typeof AuthenticatedAdminLeaderboardRoute
   '/admin/lms': typeof AuthenticatedAdminLmsRoute
   '/admin/pending-work': typeof AuthenticatedAdminPendingWorkRoute
   '/admin/questionnaires': typeof AuthenticatedAdminQuestionnairesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/todo': typeof AuthenticatedAdminTodoRoute
+  '/student/announcements': typeof AuthenticatedStudentAnnouncementsRoute
   '/student/attendance': typeof AuthenticatedStudentAttendanceRoute
+  '/student/leaderboard': typeof AuthenticatedStudentLeaderboardRoute
   '/super-admin/activities': typeof AuthenticatedSuperAdminActivitiesRoute
   '/super-admin/admin-management': typeof AuthenticatedSuperAdminAdminManagementRoute
-  '/super-admin/ai-analysis': typeof AuthenticatedSuperAdminAiAnalysisRoute
-  '/super-admin/announcements': typeof AuthenticatedSuperAdminAnnouncementsRoute
   '/super-admin/daily-diary': typeof AuthenticatedSuperAdminDailyDiaryRoute
   '/super-admin/dashboard': typeof AuthenticatedSuperAdminDashboardRoute
-  '/super-admin/leaderboard': typeof AuthenticatedSuperAdminLeaderboardRoute
   '/super-admin/lms': typeof AuthenticatedSuperAdminLmsRoute
   '/super-admin/pending-work': typeof AuthenticatedSuperAdminPendingWorkRoute
   '/super-admin/problem-statements': typeof AuthenticatedSuperAdminProblemStatementsRoute
@@ -432,10 +427,16 @@ export interface FileRoutesByFullPath {
   '/super-admin/settings': typeof AuthenticatedSuperAdminSettingsRoute
   '/super-admin/todo': typeof AuthenticatedSuperAdminTodoRoute
   '/u/$id': typeof AuthenticatedUIdRoute
+  '/admin/community/announcements': typeof AuthenticatedAdminCommunityAnnouncementsRoute
+  '/admin/community/leaderboard': typeof AuthenticatedAdminCommunityLeaderboardRoute
+  '/admin/community/post-generator': typeof AuthenticatedAdminCommunityPostGeneratorRoute
   '/admin/interns/active': typeof AuthenticatedAdminInternsActiveRoute
   '/admin/interns/onboarding': typeof AuthenticatedAdminInternsOnboardingRoute
   '/admin/operations/attendance': typeof AuthenticatedAdminOperationsAttendanceRoute
   '/admin/operations/interactions': typeof AuthenticatedAdminOperationsInteractionsRoute
+  '/super-admin/community/announcements': typeof AuthenticatedSuperAdminCommunityAnnouncementsRoute
+  '/super-admin/community/leaderboard': typeof AuthenticatedSuperAdminCommunityLeaderboardRoute
+  '/super-admin/community/post-generator': typeof AuthenticatedSuperAdminCommunityPostGeneratorRoute
   '/super-admin/interns/active': typeof AuthenticatedSuperAdminInternsActiveRoute
   '/super-admin/interns/onboarding': typeof AuthenticatedSuperAdminInternsOnboardingRoute
   '/super-admin/operations/attendance': typeof AuthenticatedSuperAdminOperationsAttendanceRoute
@@ -447,12 +448,10 @@ export interface FileRoutesByTo {
   '/unauthorized': typeof UnauthorizedRoute
   '/activities': typeof AuthenticatedActivitiesRoute
   '/attendance': typeof AuthenticatedAttendanceRoute
-  '/community': typeof AuthenticatedCommunityRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diary': typeof AuthenticatedDiaryRoute
   '/feedback-suggestions': typeof AuthenticatedFeedbackSuggestionsRoute
   '/interaction': typeof AuthenticatedInteractionRoute
-  '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/lms-integration': typeof AuthenticatedLmsIntegrationRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/pending-work': typeof AuthenticatedPendingWorkRoute
@@ -464,24 +463,20 @@ export interface FileRoutesByTo {
   '/support': typeof AuthenticatedSupportRoute
   '/todo': typeof AuthenticatedTodoRoute
   '/admin/activities': typeof AuthenticatedAdminActivitiesRoute
-  '/admin/ai-analysis': typeof AuthenticatedAdminAiAnalysisRoute
-  '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/daily-diary': typeof AuthenticatedAdminDailyDiaryRoute
   '/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
-  '/admin/leaderboard': typeof AuthenticatedAdminLeaderboardRoute
   '/admin/lms': typeof AuthenticatedAdminLmsRoute
   '/admin/pending-work': typeof AuthenticatedAdminPendingWorkRoute
   '/admin/questionnaires': typeof AuthenticatedAdminQuestionnairesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/todo': typeof AuthenticatedAdminTodoRoute
+  '/student/announcements': typeof AuthenticatedStudentAnnouncementsRoute
   '/student/attendance': typeof AuthenticatedStudentAttendanceRoute
+  '/student/leaderboard': typeof AuthenticatedStudentLeaderboardRoute
   '/super-admin/activities': typeof AuthenticatedSuperAdminActivitiesRoute
   '/super-admin/admin-management': typeof AuthenticatedSuperAdminAdminManagementRoute
-  '/super-admin/ai-analysis': typeof AuthenticatedSuperAdminAiAnalysisRoute
-  '/super-admin/announcements': typeof AuthenticatedSuperAdminAnnouncementsRoute
   '/super-admin/daily-diary': typeof AuthenticatedSuperAdminDailyDiaryRoute
   '/super-admin/dashboard': typeof AuthenticatedSuperAdminDashboardRoute
-  '/super-admin/leaderboard': typeof AuthenticatedSuperAdminLeaderboardRoute
   '/super-admin/lms': typeof AuthenticatedSuperAdminLmsRoute
   '/super-admin/pending-work': typeof AuthenticatedSuperAdminPendingWorkRoute
   '/super-admin/problem-statements': typeof AuthenticatedSuperAdminProblemStatementsRoute
@@ -489,10 +484,16 @@ export interface FileRoutesByTo {
   '/super-admin/settings': typeof AuthenticatedSuperAdminSettingsRoute
   '/super-admin/todo': typeof AuthenticatedSuperAdminTodoRoute
   '/u/$id': typeof AuthenticatedUIdRoute
+  '/admin/community/announcements': typeof AuthenticatedAdminCommunityAnnouncementsRoute
+  '/admin/community/leaderboard': typeof AuthenticatedAdminCommunityLeaderboardRoute
+  '/admin/community/post-generator': typeof AuthenticatedAdminCommunityPostGeneratorRoute
   '/admin/interns/active': typeof AuthenticatedAdminInternsActiveRoute
   '/admin/interns/onboarding': typeof AuthenticatedAdminInternsOnboardingRoute
   '/admin/operations/attendance': typeof AuthenticatedAdminOperationsAttendanceRoute
   '/admin/operations/interactions': typeof AuthenticatedAdminOperationsInteractionsRoute
+  '/super-admin/community/announcements': typeof AuthenticatedSuperAdminCommunityAnnouncementsRoute
+  '/super-admin/community/leaderboard': typeof AuthenticatedSuperAdminCommunityLeaderboardRoute
+  '/super-admin/community/post-generator': typeof AuthenticatedSuperAdminCommunityPostGeneratorRoute
   '/super-admin/interns/active': typeof AuthenticatedSuperAdminInternsActiveRoute
   '/super-admin/interns/onboarding': typeof AuthenticatedSuperAdminInternsOnboardingRoute
   '/super-admin/operations/attendance': typeof AuthenticatedSuperAdminOperationsAttendanceRoute
@@ -506,12 +507,10 @@ export interface FileRoutesById {
   '/unauthorized': typeof UnauthorizedRoute
   '/_authenticated/activities': typeof AuthenticatedActivitiesRoute
   '/_authenticated/attendance': typeof AuthenticatedAttendanceRoute
-  '/_authenticated/community': typeof AuthenticatedCommunityRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/diary': typeof AuthenticatedDiaryRoute
   '/_authenticated/feedback-suggestions': typeof AuthenticatedFeedbackSuggestionsRoute
   '/_authenticated/interaction': typeof AuthenticatedInteractionRoute
-  '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/_authenticated/lms-integration': typeof AuthenticatedLmsIntegrationRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/pending-work': typeof AuthenticatedPendingWorkRoute
@@ -523,24 +522,20 @@ export interface FileRoutesById {
   '/_authenticated/support': typeof AuthenticatedSupportRoute
   '/_authenticated/todo': typeof AuthenticatedTodoRoute
   '/_authenticated/admin/activities': typeof AuthenticatedAdminActivitiesRoute
-  '/_authenticated/admin/ai-analysis': typeof AuthenticatedAdminAiAnalysisRoute
-  '/_authenticated/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/_authenticated/admin/daily-diary': typeof AuthenticatedAdminDailyDiaryRoute
   '/_authenticated/admin/dashboard': typeof AuthenticatedAdminDashboardRoute
-  '/_authenticated/admin/leaderboard': typeof AuthenticatedAdminLeaderboardRoute
   '/_authenticated/admin/lms': typeof AuthenticatedAdminLmsRoute
   '/_authenticated/admin/pending-work': typeof AuthenticatedAdminPendingWorkRoute
   '/_authenticated/admin/questionnaires': typeof AuthenticatedAdminQuestionnairesRoute
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/admin/todo': typeof AuthenticatedAdminTodoRoute
+  '/_authenticated/student/announcements': typeof AuthenticatedStudentAnnouncementsRoute
   '/_authenticated/student/attendance': typeof AuthenticatedStudentAttendanceRoute
+  '/_authenticated/student/leaderboard': typeof AuthenticatedStudentLeaderboardRoute
   '/_authenticated/super-admin/activities': typeof AuthenticatedSuperAdminActivitiesRoute
   '/_authenticated/super-admin/admin-management': typeof AuthenticatedSuperAdminAdminManagementRoute
-  '/_authenticated/super-admin/ai-analysis': typeof AuthenticatedSuperAdminAiAnalysisRoute
-  '/_authenticated/super-admin/announcements': typeof AuthenticatedSuperAdminAnnouncementsRoute
   '/_authenticated/super-admin/daily-diary': typeof AuthenticatedSuperAdminDailyDiaryRoute
   '/_authenticated/super-admin/dashboard': typeof AuthenticatedSuperAdminDashboardRoute
-  '/_authenticated/super-admin/leaderboard': typeof AuthenticatedSuperAdminLeaderboardRoute
   '/_authenticated/super-admin/lms': typeof AuthenticatedSuperAdminLmsRoute
   '/_authenticated/super-admin/pending-work': typeof AuthenticatedSuperAdminPendingWorkRoute
   '/_authenticated/super-admin/problem-statements': typeof AuthenticatedSuperAdminProblemStatementsRoute
@@ -548,10 +543,16 @@ export interface FileRoutesById {
   '/_authenticated/super-admin/settings': typeof AuthenticatedSuperAdminSettingsRoute
   '/_authenticated/super-admin/todo': typeof AuthenticatedSuperAdminTodoRoute
   '/_authenticated/u/$id': typeof AuthenticatedUIdRoute
+  '/_authenticated/admin/community/announcements': typeof AuthenticatedAdminCommunityAnnouncementsRoute
+  '/_authenticated/admin/community/leaderboard': typeof AuthenticatedAdminCommunityLeaderboardRoute
+  '/_authenticated/admin/community/post-generator': typeof AuthenticatedAdminCommunityPostGeneratorRoute
   '/_authenticated/admin/interns/active': typeof AuthenticatedAdminInternsActiveRoute
   '/_authenticated/admin/interns/onboarding': typeof AuthenticatedAdminInternsOnboardingRoute
   '/_authenticated/admin/operations/attendance': typeof AuthenticatedAdminOperationsAttendanceRoute
   '/_authenticated/admin/operations/interactions': typeof AuthenticatedAdminOperationsInteractionsRoute
+  '/_authenticated/super-admin/community/announcements': typeof AuthenticatedSuperAdminCommunityAnnouncementsRoute
+  '/_authenticated/super-admin/community/leaderboard': typeof AuthenticatedSuperAdminCommunityLeaderboardRoute
+  '/_authenticated/super-admin/community/post-generator': typeof AuthenticatedSuperAdminCommunityPostGeneratorRoute
   '/_authenticated/super-admin/interns/active': typeof AuthenticatedSuperAdminInternsActiveRoute
   '/_authenticated/super-admin/interns/onboarding': typeof AuthenticatedSuperAdminInternsOnboardingRoute
   '/_authenticated/super-admin/operations/attendance': typeof AuthenticatedSuperAdminOperationsAttendanceRoute
@@ -565,12 +566,10 @@ export interface FileRouteTypes {
     | '/unauthorized'
     | '/activities'
     | '/attendance'
-    | '/community'
     | '/dashboard'
     | '/diary'
     | '/feedback-suggestions'
     | '/interaction'
-    | '/leaderboard'
     | '/lms-integration'
     | '/onboarding'
     | '/pending-work'
@@ -582,24 +581,20 @@ export interface FileRouteTypes {
     | '/support'
     | '/todo'
     | '/admin/activities'
-    | '/admin/ai-analysis'
-    | '/admin/announcements'
     | '/admin/daily-diary'
     | '/admin/dashboard'
-    | '/admin/leaderboard'
     | '/admin/lms'
     | '/admin/pending-work'
     | '/admin/questionnaires'
     | '/admin/settings'
     | '/admin/todo'
+    | '/student/announcements'
     | '/student/attendance'
+    | '/student/leaderboard'
     | '/super-admin/activities'
     | '/super-admin/admin-management'
-    | '/super-admin/ai-analysis'
-    | '/super-admin/announcements'
     | '/super-admin/daily-diary'
     | '/super-admin/dashboard'
-    | '/super-admin/leaderboard'
     | '/super-admin/lms'
     | '/super-admin/pending-work'
     | '/super-admin/problem-statements'
@@ -607,10 +602,16 @@ export interface FileRouteTypes {
     | '/super-admin/settings'
     | '/super-admin/todo'
     | '/u/$id'
+    | '/admin/community/announcements'
+    | '/admin/community/leaderboard'
+    | '/admin/community/post-generator'
     | '/admin/interns/active'
     | '/admin/interns/onboarding'
     | '/admin/operations/attendance'
     | '/admin/operations/interactions'
+    | '/super-admin/community/announcements'
+    | '/super-admin/community/leaderboard'
+    | '/super-admin/community/post-generator'
     | '/super-admin/interns/active'
     | '/super-admin/interns/onboarding'
     | '/super-admin/operations/attendance'
@@ -622,12 +623,10 @@ export interface FileRouteTypes {
     | '/unauthorized'
     | '/activities'
     | '/attendance'
-    | '/community'
     | '/dashboard'
     | '/diary'
     | '/feedback-suggestions'
     | '/interaction'
-    | '/leaderboard'
     | '/lms-integration'
     | '/onboarding'
     | '/pending-work'
@@ -639,24 +638,20 @@ export interface FileRouteTypes {
     | '/support'
     | '/todo'
     | '/admin/activities'
-    | '/admin/ai-analysis'
-    | '/admin/announcements'
     | '/admin/daily-diary'
     | '/admin/dashboard'
-    | '/admin/leaderboard'
     | '/admin/lms'
     | '/admin/pending-work'
     | '/admin/questionnaires'
     | '/admin/settings'
     | '/admin/todo'
+    | '/student/announcements'
     | '/student/attendance'
+    | '/student/leaderboard'
     | '/super-admin/activities'
     | '/super-admin/admin-management'
-    | '/super-admin/ai-analysis'
-    | '/super-admin/announcements'
     | '/super-admin/daily-diary'
     | '/super-admin/dashboard'
-    | '/super-admin/leaderboard'
     | '/super-admin/lms'
     | '/super-admin/pending-work'
     | '/super-admin/problem-statements'
@@ -664,10 +659,16 @@ export interface FileRouteTypes {
     | '/super-admin/settings'
     | '/super-admin/todo'
     | '/u/$id'
+    | '/admin/community/announcements'
+    | '/admin/community/leaderboard'
+    | '/admin/community/post-generator'
     | '/admin/interns/active'
     | '/admin/interns/onboarding'
     | '/admin/operations/attendance'
     | '/admin/operations/interactions'
+    | '/super-admin/community/announcements'
+    | '/super-admin/community/leaderboard'
+    | '/super-admin/community/post-generator'
     | '/super-admin/interns/active'
     | '/super-admin/interns/onboarding'
     | '/super-admin/operations/attendance'
@@ -680,12 +681,10 @@ export interface FileRouteTypes {
     | '/unauthorized'
     | '/_authenticated/activities'
     | '/_authenticated/attendance'
-    | '/_authenticated/community'
     | '/_authenticated/dashboard'
     | '/_authenticated/diary'
     | '/_authenticated/feedback-suggestions'
     | '/_authenticated/interaction'
-    | '/_authenticated/leaderboard'
     | '/_authenticated/lms-integration'
     | '/_authenticated/onboarding'
     | '/_authenticated/pending-work'
@@ -697,24 +696,20 @@ export interface FileRouteTypes {
     | '/_authenticated/support'
     | '/_authenticated/todo'
     | '/_authenticated/admin/activities'
-    | '/_authenticated/admin/ai-analysis'
-    | '/_authenticated/admin/announcements'
     | '/_authenticated/admin/daily-diary'
     | '/_authenticated/admin/dashboard'
-    | '/_authenticated/admin/leaderboard'
     | '/_authenticated/admin/lms'
     | '/_authenticated/admin/pending-work'
     | '/_authenticated/admin/questionnaires'
     | '/_authenticated/admin/settings'
     | '/_authenticated/admin/todo'
+    | '/_authenticated/student/announcements'
     | '/_authenticated/student/attendance'
+    | '/_authenticated/student/leaderboard'
     | '/_authenticated/super-admin/activities'
     | '/_authenticated/super-admin/admin-management'
-    | '/_authenticated/super-admin/ai-analysis'
-    | '/_authenticated/super-admin/announcements'
     | '/_authenticated/super-admin/daily-diary'
     | '/_authenticated/super-admin/dashboard'
-    | '/_authenticated/super-admin/leaderboard'
     | '/_authenticated/super-admin/lms'
     | '/_authenticated/super-admin/pending-work'
     | '/_authenticated/super-admin/problem-statements'
@@ -722,10 +717,16 @@ export interface FileRouteTypes {
     | '/_authenticated/super-admin/settings'
     | '/_authenticated/super-admin/todo'
     | '/_authenticated/u/$id'
+    | '/_authenticated/admin/community/announcements'
+    | '/_authenticated/admin/community/leaderboard'
+    | '/_authenticated/admin/community/post-generator'
     | '/_authenticated/admin/interns/active'
     | '/_authenticated/admin/interns/onboarding'
     | '/_authenticated/admin/operations/attendance'
     | '/_authenticated/admin/operations/interactions'
+    | '/_authenticated/super-admin/community/announcements'
+    | '/_authenticated/super-admin/community/leaderboard'
+    | '/_authenticated/super-admin/community/post-generator'
     | '/_authenticated/super-admin/interns/active'
     | '/_authenticated/super-admin/interns/onboarding'
     | '/_authenticated/super-admin/operations/attendance'
@@ -839,13 +840,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLmsIntegrationRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/leaderboard': {
-      id: '/_authenticated/leaderboard'
-      path: '/leaderboard'
-      fullPath: '/leaderboard'
-      preLoaderRoute: typeof AuthenticatedLeaderboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/interaction': {
       id: '/_authenticated/interaction'
       path: '/interaction'
@@ -872,13 +866,6 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/community': {
-      id: '/_authenticated/community'
-      path: '/community'
-      fullPath: '/community'
-      preLoaderRoute: typeof AuthenticatedCommunityRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/attendance': {
@@ -944,13 +931,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSuperAdminLmsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/super-admin/leaderboard': {
-      id: '/_authenticated/super-admin/leaderboard'
-      path: '/super-admin/leaderboard'
-      fullPath: '/super-admin/leaderboard'
-      preLoaderRoute: typeof AuthenticatedSuperAdminLeaderboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/super-admin/dashboard': {
       id: '/_authenticated/super-admin/dashboard'
       path: '/super-admin/dashboard'
@@ -963,20 +943,6 @@ declare module '@tanstack/react-router' {
       path: '/super-admin/daily-diary'
       fullPath: '/super-admin/daily-diary'
       preLoaderRoute: typeof AuthenticatedSuperAdminDailyDiaryRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/super-admin/announcements': {
-      id: '/_authenticated/super-admin/announcements'
-      path: '/super-admin/announcements'
-      fullPath: '/super-admin/announcements'
-      preLoaderRoute: typeof AuthenticatedSuperAdminAnnouncementsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/super-admin/ai-analysis': {
-      id: '/_authenticated/super-admin/ai-analysis'
-      path: '/super-admin/ai-analysis'
-      fullPath: '/super-admin/ai-analysis'
-      preLoaderRoute: typeof AuthenticatedSuperAdminAiAnalysisRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/super-admin/admin-management': {
@@ -993,11 +959,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSuperAdminActivitiesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/student/leaderboard': {
+      id: '/_authenticated/student/leaderboard'
+      path: '/student/leaderboard'
+      fullPath: '/student/leaderboard'
+      preLoaderRoute: typeof AuthenticatedStudentLeaderboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/student/attendance': {
       id: '/_authenticated/student/attendance'
       path: '/student/attendance'
       fullPath: '/student/attendance'
       preLoaderRoute: typeof AuthenticatedStudentAttendanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/student/announcements': {
+      id: '/_authenticated/student/announcements'
+      path: '/student/announcements'
+      fullPath: '/student/announcements'
+      preLoaderRoute: typeof AuthenticatedStudentAnnouncementsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/todo': {
@@ -1035,13 +1015,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminLmsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/leaderboard': {
-      id: '/_authenticated/admin/leaderboard'
-      path: '/admin/leaderboard'
-      fullPath: '/admin/leaderboard'
-      preLoaderRoute: typeof AuthenticatedAdminLeaderboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/admin/dashboard': {
       id: '/_authenticated/admin/dashboard'
       path: '/admin/dashboard'
@@ -1054,20 +1027,6 @@ declare module '@tanstack/react-router' {
       path: '/admin/daily-diary'
       fullPath: '/admin/daily-diary'
       preLoaderRoute: typeof AuthenticatedAdminDailyDiaryRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/admin/announcements': {
-      id: '/_authenticated/admin/announcements'
-      path: '/admin/announcements'
-      fullPath: '/admin/announcements'
-      preLoaderRoute: typeof AuthenticatedAdminAnnouncementsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/admin/ai-analysis': {
-      id: '/_authenticated/admin/ai-analysis'
-      path: '/admin/ai-analysis'
-      fullPath: '/admin/ai-analysis'
-      preLoaderRoute: typeof AuthenticatedAdminAiAnalysisRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/activities': {
@@ -1105,6 +1064,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSuperAdminInternsActiveRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/super-admin/community/post-generator': {
+      id: '/_authenticated/super-admin/community/post-generator'
+      path: '/super-admin/community/post-generator'
+      fullPath: '/super-admin/community/post-generator'
+      preLoaderRoute: typeof AuthenticatedSuperAdminCommunityPostGeneratorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/super-admin/community/leaderboard': {
+      id: '/_authenticated/super-admin/community/leaderboard'
+      path: '/super-admin/community/leaderboard'
+      fullPath: '/super-admin/community/leaderboard'
+      preLoaderRoute: typeof AuthenticatedSuperAdminCommunityLeaderboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/super-admin/community/announcements': {
+      id: '/_authenticated/super-admin/community/announcements'
+      path: '/super-admin/community/announcements'
+      fullPath: '/super-admin/community/announcements'
+      preLoaderRoute: typeof AuthenticatedSuperAdminCommunityAnnouncementsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/operations/interactions': {
       id: '/_authenticated/admin/operations/interactions'
       path: '/admin/operations/interactions'
@@ -1133,18 +1113,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminInternsActiveRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/community/post-generator': {
+      id: '/_authenticated/admin/community/post-generator'
+      path: '/admin/community/post-generator'
+      fullPath: '/admin/community/post-generator'
+      preLoaderRoute: typeof AuthenticatedAdminCommunityPostGeneratorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/community/leaderboard': {
+      id: '/_authenticated/admin/community/leaderboard'
+      path: '/admin/community/leaderboard'
+      fullPath: '/admin/community/leaderboard'
+      preLoaderRoute: typeof AuthenticatedAdminCommunityLeaderboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/community/announcements': {
+      id: '/_authenticated/admin/community/announcements'
+      path: '/admin/community/announcements'
+      fullPath: '/admin/community/announcements'
+      preLoaderRoute: typeof AuthenticatedAdminCommunityAnnouncementsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedActivitiesRoute: typeof AuthenticatedActivitiesRoute
   AuthenticatedAttendanceRoute: typeof AuthenticatedAttendanceRoute
-  AuthenticatedCommunityRoute: typeof AuthenticatedCommunityRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDiaryRoute: typeof AuthenticatedDiaryRoute
   AuthenticatedFeedbackSuggestionsRoute: typeof AuthenticatedFeedbackSuggestionsRoute
   AuthenticatedInteractionRoute: typeof AuthenticatedInteractionRoute
-  AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
   AuthenticatedLmsIntegrationRoute: typeof AuthenticatedLmsIntegrationRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedPendingWorkRoute: typeof AuthenticatedPendingWorkRoute
@@ -1156,24 +1155,20 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSupportRoute: typeof AuthenticatedSupportRoute
   AuthenticatedTodoRoute: typeof AuthenticatedTodoRoute
   AuthenticatedAdminActivitiesRoute: typeof AuthenticatedAdminActivitiesRoute
-  AuthenticatedAdminAiAnalysisRoute: typeof AuthenticatedAdminAiAnalysisRoute
-  AuthenticatedAdminAnnouncementsRoute: typeof AuthenticatedAdminAnnouncementsRoute
   AuthenticatedAdminDailyDiaryRoute: typeof AuthenticatedAdminDailyDiaryRoute
   AuthenticatedAdminDashboardRoute: typeof AuthenticatedAdminDashboardRoute
-  AuthenticatedAdminLeaderboardRoute: typeof AuthenticatedAdminLeaderboardRoute
   AuthenticatedAdminLmsRoute: typeof AuthenticatedAdminLmsRoute
   AuthenticatedAdminPendingWorkRoute: typeof AuthenticatedAdminPendingWorkRoute
   AuthenticatedAdminQuestionnairesRoute: typeof AuthenticatedAdminQuestionnairesRoute
   AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
   AuthenticatedAdminTodoRoute: typeof AuthenticatedAdminTodoRoute
+  AuthenticatedStudentAnnouncementsRoute: typeof AuthenticatedStudentAnnouncementsRoute
   AuthenticatedStudentAttendanceRoute: typeof AuthenticatedStudentAttendanceRoute
+  AuthenticatedStudentLeaderboardRoute: typeof AuthenticatedStudentLeaderboardRoute
   AuthenticatedSuperAdminActivitiesRoute: typeof AuthenticatedSuperAdminActivitiesRoute
   AuthenticatedSuperAdminAdminManagementRoute: typeof AuthenticatedSuperAdminAdminManagementRoute
-  AuthenticatedSuperAdminAiAnalysisRoute: typeof AuthenticatedSuperAdminAiAnalysisRoute
-  AuthenticatedSuperAdminAnnouncementsRoute: typeof AuthenticatedSuperAdminAnnouncementsRoute
   AuthenticatedSuperAdminDailyDiaryRoute: typeof AuthenticatedSuperAdminDailyDiaryRoute
   AuthenticatedSuperAdminDashboardRoute: typeof AuthenticatedSuperAdminDashboardRoute
-  AuthenticatedSuperAdminLeaderboardRoute: typeof AuthenticatedSuperAdminLeaderboardRoute
   AuthenticatedSuperAdminLmsRoute: typeof AuthenticatedSuperAdminLmsRoute
   AuthenticatedSuperAdminPendingWorkRoute: typeof AuthenticatedSuperAdminPendingWorkRoute
   AuthenticatedSuperAdminProblemStatementsRoute: typeof AuthenticatedSuperAdminProblemStatementsRoute
@@ -1181,10 +1176,16 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSuperAdminSettingsRoute: typeof AuthenticatedSuperAdminSettingsRoute
   AuthenticatedSuperAdminTodoRoute: typeof AuthenticatedSuperAdminTodoRoute
   AuthenticatedUIdRoute: typeof AuthenticatedUIdRoute
+  AuthenticatedAdminCommunityAnnouncementsRoute: typeof AuthenticatedAdminCommunityAnnouncementsRoute
+  AuthenticatedAdminCommunityLeaderboardRoute: typeof AuthenticatedAdminCommunityLeaderboardRoute
+  AuthenticatedAdminCommunityPostGeneratorRoute: typeof AuthenticatedAdminCommunityPostGeneratorRoute
   AuthenticatedAdminInternsActiveRoute: typeof AuthenticatedAdminInternsActiveRoute
   AuthenticatedAdminInternsOnboardingRoute: typeof AuthenticatedAdminInternsOnboardingRoute
   AuthenticatedAdminOperationsAttendanceRoute: typeof AuthenticatedAdminOperationsAttendanceRoute
   AuthenticatedAdminOperationsInteractionsRoute: typeof AuthenticatedAdminOperationsInteractionsRoute
+  AuthenticatedSuperAdminCommunityAnnouncementsRoute: typeof AuthenticatedSuperAdminCommunityAnnouncementsRoute
+  AuthenticatedSuperAdminCommunityLeaderboardRoute: typeof AuthenticatedSuperAdminCommunityLeaderboardRoute
+  AuthenticatedSuperAdminCommunityPostGeneratorRoute: typeof AuthenticatedSuperAdminCommunityPostGeneratorRoute
   AuthenticatedSuperAdminInternsActiveRoute: typeof AuthenticatedSuperAdminInternsActiveRoute
   AuthenticatedSuperAdminInternsOnboardingRoute: typeof AuthenticatedSuperAdminInternsOnboardingRoute
   AuthenticatedSuperAdminOperationsAttendanceRoute: typeof AuthenticatedSuperAdminOperationsAttendanceRoute
@@ -1194,12 +1195,10 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedActivitiesRoute: AuthenticatedActivitiesRoute,
   AuthenticatedAttendanceRoute: AuthenticatedAttendanceRoute,
-  AuthenticatedCommunityRoute: AuthenticatedCommunityRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDiaryRoute: AuthenticatedDiaryRoute,
   AuthenticatedFeedbackSuggestionsRoute: AuthenticatedFeedbackSuggestionsRoute,
   AuthenticatedInteractionRoute: AuthenticatedInteractionRoute,
-  AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
   AuthenticatedLmsIntegrationRoute: AuthenticatedLmsIntegrationRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedPendingWorkRoute: AuthenticatedPendingWorkRoute,
@@ -1211,30 +1210,24 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSupportRoute: AuthenticatedSupportRoute,
   AuthenticatedTodoRoute: AuthenticatedTodoRoute,
   AuthenticatedAdminActivitiesRoute: AuthenticatedAdminActivitiesRoute,
-  AuthenticatedAdminAiAnalysisRoute: AuthenticatedAdminAiAnalysisRoute,
-  AuthenticatedAdminAnnouncementsRoute: AuthenticatedAdminAnnouncementsRoute,
   AuthenticatedAdminDailyDiaryRoute: AuthenticatedAdminDailyDiaryRoute,
   AuthenticatedAdminDashboardRoute: AuthenticatedAdminDashboardRoute,
-  AuthenticatedAdminLeaderboardRoute: AuthenticatedAdminLeaderboardRoute,
   AuthenticatedAdminLmsRoute: AuthenticatedAdminLmsRoute,
   AuthenticatedAdminPendingWorkRoute: AuthenticatedAdminPendingWorkRoute,
   AuthenticatedAdminQuestionnairesRoute: AuthenticatedAdminQuestionnairesRoute,
   AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
   AuthenticatedAdminTodoRoute: AuthenticatedAdminTodoRoute,
+  AuthenticatedStudentAnnouncementsRoute:
+    AuthenticatedStudentAnnouncementsRoute,
   AuthenticatedStudentAttendanceRoute: AuthenticatedStudentAttendanceRoute,
+  AuthenticatedStudentLeaderboardRoute: AuthenticatedStudentLeaderboardRoute,
   AuthenticatedSuperAdminActivitiesRoute:
     AuthenticatedSuperAdminActivitiesRoute,
   AuthenticatedSuperAdminAdminManagementRoute:
     AuthenticatedSuperAdminAdminManagementRoute,
-  AuthenticatedSuperAdminAiAnalysisRoute:
-    AuthenticatedSuperAdminAiAnalysisRoute,
-  AuthenticatedSuperAdminAnnouncementsRoute:
-    AuthenticatedSuperAdminAnnouncementsRoute,
   AuthenticatedSuperAdminDailyDiaryRoute:
     AuthenticatedSuperAdminDailyDiaryRoute,
   AuthenticatedSuperAdminDashboardRoute: AuthenticatedSuperAdminDashboardRoute,
-  AuthenticatedSuperAdminLeaderboardRoute:
-    AuthenticatedSuperAdminLeaderboardRoute,
   AuthenticatedSuperAdminLmsRoute: AuthenticatedSuperAdminLmsRoute,
   AuthenticatedSuperAdminPendingWorkRoute:
     AuthenticatedSuperAdminPendingWorkRoute,
@@ -1245,6 +1238,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSuperAdminSettingsRoute: AuthenticatedSuperAdminSettingsRoute,
   AuthenticatedSuperAdminTodoRoute: AuthenticatedSuperAdminTodoRoute,
   AuthenticatedUIdRoute: AuthenticatedUIdRoute,
+  AuthenticatedAdminCommunityAnnouncementsRoute:
+    AuthenticatedAdminCommunityAnnouncementsRoute,
+  AuthenticatedAdminCommunityLeaderboardRoute:
+    AuthenticatedAdminCommunityLeaderboardRoute,
+  AuthenticatedAdminCommunityPostGeneratorRoute:
+    AuthenticatedAdminCommunityPostGeneratorRoute,
   AuthenticatedAdminInternsActiveRoute: AuthenticatedAdminInternsActiveRoute,
   AuthenticatedAdminInternsOnboardingRoute:
     AuthenticatedAdminInternsOnboardingRoute,
@@ -1252,6 +1251,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedAdminOperationsAttendanceRoute,
   AuthenticatedAdminOperationsInteractionsRoute:
     AuthenticatedAdminOperationsInteractionsRoute,
+  AuthenticatedSuperAdminCommunityAnnouncementsRoute:
+    AuthenticatedSuperAdminCommunityAnnouncementsRoute,
+  AuthenticatedSuperAdminCommunityLeaderboardRoute:
+    AuthenticatedSuperAdminCommunityLeaderboardRoute,
+  AuthenticatedSuperAdminCommunityPostGeneratorRoute:
+    AuthenticatedSuperAdminCommunityPostGeneratorRoute,
   AuthenticatedSuperAdminInternsActiveRoute:
     AuthenticatedSuperAdminInternsActiveRoute,
   AuthenticatedSuperAdminInternsOnboardingRoute:

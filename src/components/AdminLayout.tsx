@@ -97,17 +97,17 @@ const getSidebarMenu = (role: string): MenuGroup[] => {
       title: "Community",
       items: [
         {
-          to: isSuperAdmin ? "/super-admin/ai-analysis" : "/admin/ai-analysis",
-          label: "AI Analysis",
+          to: isSuperAdmin ? "/super-admin/community/post-generator" : "/admin/community/post-generator",
+          label: "AI Post Generator",
           icon: Activity
         },
         {
-          to: isSuperAdmin ? "/super-admin/leaderboard" : "/admin/leaderboard",
+          to: isSuperAdmin ? "/super-admin/community/leaderboard" : "/admin/community/leaderboard",
           label: "Leaderboard",
           icon: Trophy
         },
         {
-          to: isSuperAdmin ? "/super-admin/announcements" : "/admin/announcements",
+          to: isSuperAdmin ? "/super-admin/community/announcements" : "/admin/community/announcements",
           label: "Announcements",
           icon: Send
         }
